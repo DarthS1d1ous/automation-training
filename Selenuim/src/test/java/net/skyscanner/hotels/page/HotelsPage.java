@@ -1,4 +1,4 @@
-package net.skyscanner.hotels;
+package net.skyscanner.hotels.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class HotelsPage {
-
-    private WebDriver webDriver;
-
+public class HotelsPage extends AbstractPage {
     @FindBy(xpath = "//input[@name='destination-autosuggest']")
     private WebElement destinationsInput;
 
@@ -30,8 +27,12 @@ public class HotelsPage {
     private List<WebElement> detailHotelInformationButton;
 
 
+    protected AbstractPage openPage() {
+        return null;
+    }
+
     public HotelsPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 
@@ -49,13 +50,13 @@ public class HotelsPage {
         this.guestsNumber = webDriver
                 .findElement(By.xpath("//select[@class='BpkSelect_bpk-select__3Bhp6 PeopleRoomSelector_PeopleRoomSelector__adults__1vqnl']/descendant-or-self::option[@value='" + guestsNumber + "']"));
         this.guestsNumber.click();
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         searchHotelsButton.click();
         return this;
     }
 
     public HotelDetailPage openDetailedHotelInformation(int hotelNumber) {
-        webDriver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         if (hotelNumber - 1 < detailHotelInformationButton.size()) {
             detailHotelInformationButton.get(hotelNumber - 1).click();
             ArrayList<String> newTab = new ArrayList<String>(webDriver.getWindowHandles());

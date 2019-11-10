@@ -1,4 +1,6 @@
-import net.skyscanner.hotels.HomePage;
+package net.skyscanner.hotels.test;
+
+import net.skyscanner.hotels.page.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
