@@ -15,8 +15,8 @@ public class HotelDetailPage extends AbstractPage {
     @FindBy(xpath = "//div[@class='SubscribeLogin_SubscribeLogin__2XDN6']/descendant-or-self::p[@class='BpkText_bpk-text__nraB1 BpkText_bpk-text--base__2vSPQ']")
     private WebElement priceAlertMainText;
 
-    protected AbstractPage openPage() {
-        return null;
+    protected HotelDetailPage openPage() {
+        return this;
     }
 
     public HotelDetailPage(WebDriver webDriver) {

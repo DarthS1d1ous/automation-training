@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class HotelsPage extends AbstractPage {
-    @FindBy(xpath = "//input[@name='destination-autosuggest']")
+    @FindBy(xpath = "//input[@id='destination-autosuggest']")
     private WebElement destinationsInput;
 
     @FindBy(xpath = "//select[@class='BpkSelect_bpk-select__3Bhp6 PeopleRoomSelector_PeopleRoomSelector__adults__1vqnl']")
@@ -27,8 +27,8 @@ public class HotelsPage extends AbstractPage {
     private List<WebElement> detailHotelInformationButton;
 
 
-    protected AbstractPage openPage() {
-        return null;
+    protected HotelsPage openPage() {
+        return this;
     }
 
     public HotelsPage(WebDriver webDriver) {
@@ -37,6 +37,7 @@ public class HotelsPage extends AbstractPage {
     }
 
     public HotelsPage incorrectSearchForHotels(String destinations) {
+        destinationsInput.click();
         destinationsInput.sendKeys(destinations);
         destinationsInput.click();
         searchHotelsButton.click();
