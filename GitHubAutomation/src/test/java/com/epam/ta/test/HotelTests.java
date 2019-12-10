@@ -103,7 +103,7 @@ public class HotelTests extends CommonConditions {
 
         String destinationTextFromSearchBar = hotelsPage.getDestination();
 
-        assertThat(destinationTextFromSearchBar, is(equalTo(MINSK_SITY_IN_RUSSIA)));
+        assertThat(destinationTextFromSearchBar, is(equalTo(hotelSearchCriteria.getDestinations())));
     }
 
     @Test

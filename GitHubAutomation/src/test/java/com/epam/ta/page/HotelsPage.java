@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class HotelsPage extends AbstractPage {
-    private final Logger logger = LogManager.getRootLogger();
     private final String XPATH = "//select[@class='BpkSelect_bpk-select__3Bhp6 PeopleRoomSelector_PeopleRoomSelector__adults__1vqnl']/descendant-or-self::option[@value='%d']";
 
     @FindBy(xpath = "//input[@id='destination-autosuggest']")
@@ -79,12 +78,16 @@ public class HotelsPage extends AbstractPage {
     public HotelsPage searchForHotels(String destinations, int adultsNumber, int roomsNumber) {
         destinationsInput.sendKeys(destinations);
         destinationsInput.click();
+        logger.info("Input destination");
         guestsSelect.click();
+        logger.info("Opened guests selector");
         changeRoomsCount(roomsNumber);
         changeAdultsCount(adultsNumber);
         applyGuestsNumber.click();
+        logger.info("Save changes");
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         searchHotelsButton.click();
+        logger.info("Pressed search button");
         return this;
     }
 
@@ -92,6 +95,7 @@ public class HotelsPage extends AbstractPage {
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         if (hotelNumber - 1 < detailHotelInformationButton.size()) {
             detailHotelInformationButton.get(hotelNumber - 1).click();
+            logger.info("Opened detail Hotel Page");
             ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
             driver.switchTo().window(newTab.get(1));
             return new HotelDetailPage(driver);
@@ -101,32 +105,38 @@ public class HotelsPage extends AbstractPage {
 
     public String getHotelPrice(int hotelNumber) {
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        logger.info("Get hotel price");
         return hotelNumber - 1 < hotelPrice.size() ? hotelPrice.get(hotelNumber - 1).getText() : null;
     }
 
     public String getHotelName(int hotelNumber) {
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        logger.info("Get hotel name");
         return hotelNumber - 1 < hotelName.size() ? hotelName.get(hotelNumber - 1).getText() : null;
     }
 
     public String getDestination() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         Thread.sleep(2000);
+        logger.info("Get destination");
         return destinationsInput.getAttribute("value");
     }
 
     public String getDestinationFromSearchBar() {
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         System.out.println(searchBarDestination.getTagName());
+        logger.info("Get destination from search bar");
         return searchBarDestination.getText();
     }
 
     public String getHotelRating() {
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        logger.info("Get hotel rating");
         return hotelRating.getText();
     }
 
     public String getCurrentUrl() {
+        logger.info("Get current url");
         return driver.getCurrentUrl();
     }
 
@@ -134,6 +144,7 @@ public class HotelsPage extends AbstractPage {
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         if (hotelNumber - 1 < selectionOfHotels.size()) {
             selectionOfHotels.get(hotelNumber - 1).click();
+            logger.info("Opened hotel from selection of hotels");
             return this;
         }
         return null;
@@ -141,6 +152,7 @@ public class HotelsPage extends AbstractPage {
 
     public String getHotelNameFromSelectionOfHotels(int hotelNumber) {
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        logger.info("Get hotel name from selection of hotels");
         return hotelNumber - 1 < hotelNamesInsselectionOfHotels.size() ? hotelNamesInsselectionOfHotels.get(hotelNumber - 1).getText() : null;
     }
 
@@ -149,10 +161,12 @@ public class HotelsPage extends AbstractPage {
         if (roomsClickCount > 0) {
             for (int i = 0; i <= roomsClickCount; i++) {
                 plusRoomsButtuon.click();
+                logger.info("Add 1 room");
             }
         } else {
             for (int i = 0; i <= Math.abs(roomsClickCount); i++) {
                 minusRoomsButtuon.click();
+                logger.info("Remove 1 room");
             }
         }
     }
@@ -162,10 +176,12 @@ public class HotelsPage extends AbstractPage {
         if (adultsClickCount > 0) {
             for (int i = 0; i < adultsClickCount; i++) {
                 plusAdultsButtuon.click();
+                logger.info("Add 1 adult");
             }
         } else {
             for (int i = 0; i < Math.abs(adultsClickCount); i++) {
                 minusAdultsButtuon.click();
+                logger.info("Remove 1 adult");
             }
         }
     }

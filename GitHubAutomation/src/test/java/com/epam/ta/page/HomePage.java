@@ -11,15 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.concurrent.TimeUnit;
 
 public class HomePage extends AbstractPage {
-
-    private final Logger logger = LogManager.getRootLogger();
-
     private static final String HOMEPAGE_URL = "https://www.skyscanner.net";
 
     @FindBy(xpath = "//a[@data-analytics-name='hotels']")
     private WebElement hotelsTag;
-
-    private final By linkLoggedInUserLocator = By.xpath("//meta[@name='user-login']");
 
     public HomePage(WebDriver driver) {
         super(driver);
