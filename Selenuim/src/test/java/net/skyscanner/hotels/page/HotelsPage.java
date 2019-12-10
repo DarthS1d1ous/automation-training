@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class HotelsPage extends AbstractPage {
+    private final String XPATH = "//select[@class='BpkSelect_bpk-select__3Bhp6 PeopleRoomSelector_PeopleRoomSelector__adults__1vqnl']/descendant-or-self::option[@value='%d']";
+
     @FindBy(xpath = "//input[@id='destination-autosuggest']")
     private WebElement destinationsInput;
 
     @FindBy(xpath = "//select[@class='BpkSelect_bpk-select__3Bhp6 PeopleRoomSelector_PeopleRoomSelector__adults__1vqnl']")
     private WebElement guestsSelect;
 
-    @FindBy(xpath = "//select[@class='BpkSelect_bpk-select__3Bhp6 PeopleRoomSelector_PeopleRoomSelector__adults__1vqnl']")
     private WebElement guestsNumber;
 
     @FindBy(xpath = "//button[@class='BpkButton_bpk-button__3CLCx BpkButton_bpk-button--large__3nGhA SearchControls_SearchControls__cta__3nH4P']")
@@ -49,7 +50,7 @@ public class HotelsPage extends AbstractPage {
         destinationsInput.click();
         guestsSelect.click();
         this.guestsNumber = webDriver
-                .findElement(By.xpath("//select[@class='BpkSelect_bpk-select__3Bhp6 PeopleRoomSelector_PeopleRoomSelector__adults__1vqnl']/descendant-or-self::option[@value='" + guestsNumber + "']"));
+                .findElement(By.xpath(String.format(XPATH,guestsNumber)));
         this.guestsNumber.click();
         webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         searchHotelsButton.click();

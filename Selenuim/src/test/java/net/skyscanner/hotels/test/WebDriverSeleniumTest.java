@@ -1,12 +1,15 @@
 package net.skyscanner.hotels.test;
 
 import net.skyscanner.hotels.page.HomePage;
+import net.skyscanner.hotels.page.HotelDetailPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
 
 public class WebDriverSeleniumTest {
     private static final String SKYSCANNER_HOTELS_URL = "https://www.skyscanner.net/hotels";
@@ -32,12 +35,14 @@ public class WebDriverSeleniumTest {
 
     @Test
     public void getPriceAlertMainText() {
-        String priceAlertMainText = new HomePage(webDriver)
+        HotelDetailPage hotelDetailPage = new HomePage(webDriver)
                 .openPage()
                 .goToTheHotelsTab()
                 .correctSearchForHotels("Milan", 1)
-                .openDetailedHotelInformation(1)
-                .openPricingAlertSettings()
+                .openDetailedHotelInformation(1);
+        ArrayList<String> newTab = new ArrayList<String>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(newTab.get(1));
+        String priceAlertMainText = hotelDetailPage.openPricingAlertSettings()
                 .getPriceAlertMainText();
         Assert.assertEquals(PRICE_ALERT_MAIN_TEXT, priceAlertMainText);
     }
