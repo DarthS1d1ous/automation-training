@@ -20,7 +20,7 @@ public class HotelSearchCriteriaCreator {
 
     public static HotelSearchCriteria withEmptyDate() {
         return new HotelSearchCriteria(TestDataReader.getTestData(TESTDATA_HOTEL_SEARCH_CRITERIA_DESTINATION),
-                "", "",
+                null, null,
                 Integer.parseInt(TestDataReader.getTestData(TESTDATA_HOTEL_SEARCH_CRITERIA_GUESTS_NUMBER)),
                 Integer.parseInt(TestDataReader.getTestData(TESTDATA_HOTEL_SEARCH_CRITERIA_ROOMS_NUMBER)));
     }

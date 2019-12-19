@@ -29,8 +29,8 @@ public class HomePage extends AbstractPage {
     }
 
     public HotelsPage goToTheHotelsTab() {
-        hotelsTag.click();
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        hotelsTag.click();
         logger.info("Hotels Tab opened");
         return new HotelsPage(driver);
     }

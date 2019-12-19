@@ -2,6 +2,7 @@ package com.epam.ta.page;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,7 +54,7 @@ public class HotelsPage extends AbstractPage {
     @FindBy(xpath = "//span[@class='HotelCard_HotelCard__name__3EA3e']")
     private List<WebElement> hotelName;
 
-    @FindBy(xpath = "//*[@id='app-root']/div/div[2]/div[2]/div/div[2]/div/div/div[1]/div[1]/a/div[2]/div[1]/div[1]/div[2]/div[3]/div[1]/span")
+    @FindBy(xpath = "//*[@class='BpkText_bpk-text__nraB1 BpkText_bpk-text--sm__7CSMP CardScore_CardScore__OzMF2 CardScore_CardScore--rating_very_good__ymdxl']")
     private WebElement hotelRating;
 
     @FindBy(xpath = "//div[@class='HotelCard_HotelCard__cta__26snW']/descendant-or-self::button[@class='BpkButton_bpk-button__3CLCx']")
@@ -76,8 +77,14 @@ public class HotelsPage extends AbstractPage {
     }
 
     public HotelsPage searchForHotels(String destinations, int adultsNumber, int roomsNumber) {
-        destinationsInput.sendKeys(destinations);
-        destinationsInput.click();
+        driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        try {
+            destinationsInput.sendKeys(destinations);
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            destinationsInput.sendKeys(destinations);
+        }
         logger.info("Input destination");
         guestsSelect.click();
         logger.info("Opened guests selector");

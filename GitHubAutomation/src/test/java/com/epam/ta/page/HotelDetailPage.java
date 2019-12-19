@@ -31,7 +31,7 @@ public class HotelDetailPage extends AbstractPage {
     @FindBy(xpath = "//*[@id='app-root']/div/div/div[4]/div[3]/div[1]/div/span")
     private WebElement hotelPrice;
 
-    @FindBy(xpath = "//*[@id='app-root']/div/div/div[4]/div[1]/div/div[2]/div[1]/span")
+    @FindBy(xpath = "//span[@class='BpkText_bpk-text__nraB1 BpkText_bpk-text--sm__7CSMP ScoreCircleExp_ScoreCircleExp__3W1k7 ScoreCircleExp_ScoreCircleExp--base__1pnPl']")
     private WebElement hotelRating;
 
     @FindBy(xpath = "//div[@class='HotelStay_HotelStay__editIcon__2Zo-F']")
