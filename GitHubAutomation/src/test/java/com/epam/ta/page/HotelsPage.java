@@ -54,7 +54,7 @@ public class HotelsPage extends AbstractPage {
     @FindBy(xpath = "//span[@class='HotelCard_HotelCard__name__3EA3e']")
     private List<WebElement> hotelName;
 
-    @FindBy(xpath = "//*[@class='BpkText_bpk-text__nraB1 BpkText_bpk-text--sm__7CSMP CardScore_CardScore__OzMF2 CardScore_CardScore--rating_very_good__ymdxl']")
+    @FindBy(xpath = "//span[@class='BpkText_bpk-text__nraB1 BpkText_bpk-text--sm__7CSMP CardScore_CardScore__OzMF2 CardScore_CardScore--rating_excellent__ROatW']")
     private WebElement hotelRating;
 
     @FindBy(xpath = "//div[@class='HotelCard_HotelCard__cta__26snW']/descendant-or-self::button[@class='BpkButton_bpk-button__3CLCx']")
@@ -85,6 +85,7 @@ public class HotelsPage extends AbstractPage {
         {
             destinationsInput.sendKeys(destinations);
         }
+        destinationsInput.click();
         logger.info("Input destination");
         guestsSelect.click();
         logger.info("Opened guests selector");
