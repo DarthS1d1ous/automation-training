@@ -10,10 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.concurrent.TimeUnit;
 
 public class HotelDetailPage extends AbstractPage {
-    @FindBy(xpath = "//button[@class='BpkButton_bpk-button__3CLCx BpkButton_bpk-button--secondary__Rr80M DetailsPageSubscribeButton_DetailsPageSubscribeButton__34hIL']")
+    @FindBy(xpath = "//button[@class='BpkLink_bpk-link__ETaNq DetailsPageSubscribeButton_DetailsPageSubscribeButtonDesktop__1Uolo']")
     private WebElement priceAlertButton;
 
-    @FindBy(xpath = "//div[@class='SubscribeLogin_SubscribeLogin__2XDN6']/descendant-or-self::p[@class='BpkText_bpk-text__nraB1 BpkText_bpk-text--base__2vSPQ']")
+    @FindBy(xpath = "//p[@class='BpkText_bpk-text__nraB1 BpkText_bpk-text--base__2vSPQ']")
     private WebElement priceAlertMainText;
 
     @FindBy(xpath = "//*[@id='app-root']/div/div/div[4]/div[3]/div[1]/a")
